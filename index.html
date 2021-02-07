@@ -12,13 +12,15 @@
     
     <div id="login-area">
         <h1 class="bank-title">Welcome to Pioneer Bank</h1>
-        <div class="submit-area">
+        <div id="submit-box" class="submit-area">
             <h4>Login</h4>
-            <input type="text" class="form-control" placeholder="Email">
-            <br>
-            <input type="password" name="" id="" class="form-control" placeholder="password">
-            <br>
-            <button id="login" class="btn btn-success">Enter</button>
+            <form>
+                <input type="text" class="form-control" name="Email" placeholder="Email"  required />
+                <br>
+                <input type="password" class="form-control" name="password" placeholder="password" required />
+                <br>
+                <button type="submit" id="login" class="btn btn-success">Enter</button>
+            </form>
         </div>
     </div>
     <div id="transaction-area">
@@ -33,7 +35,7 @@
             <div class="col-md-4">
                 <div class="withdraw status">
                     <h5>Withdraw</h5>
-                    <h2>$00</h2>
+                    <h2>$ <span id="currentWithdraw">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -89,11 +91,21 @@
         const withdrawBtn = document.getElementById('addWithdraw');
         withdrawBtn.addEventListener('click', function(){
             const withdrawNumber = getInputNumber("withdrawAmount");
+
+            updateSpanText("currentWithdraw", withdrawNumber);
+            updateSpanText("currentBalance", -1 * withdrawNumber);
+            document.getElementById("withdrawAmount").value = "";
         })
 
         function getInputNumber(id){
             const amount = document.getElementById(id).value;
-            const amountNumber = parseFloat(amount);
+            let amountNumber = parseFloat(amount);
+            if(amountNumber < 0 || isNaN(amountNumber)){
+                amountNumber = 0;
+                alert("Amount cannot be Negative / Empty!");
+                return amountNumber;
+            }
+            else
             return amountNumber;
         
         };

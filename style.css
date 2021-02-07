@@ -5,11 +5,16 @@ body{
 .bank-title{
     text-align: center;
 }
+#submit-box{
+    position: absolute;
+    top: 25%;
+    left: 42%;
+}
 .submit-area{
-    margin-top: 50px;
-    padding: 40px;
     border-radius: 10px;
     box-shadow: 5px 5px 10px gray;
+    padding: 45px;
+    margin-top: 50px;
 }
 #transaction-area{
     display: none;
